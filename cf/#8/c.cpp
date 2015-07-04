@@ -1,118 +1,77 @@
 # include <bits/stdc++.h>
-using namespace std;
 
-# define testin freopen("in.txt", "r", stdin)
+# define get_bit(x, i) (((x)>>(i))&0x1)
 
-typedef long long int lli;
-
-const int maxn = 55;
+const int maxn = 25;
+const int INF = std::numeric_limits<int>::max();
 
 int n;
+int gx, gy;
+int x[maxn], y[maxn];
 
-int head;
-int L[maxn], R[maxn];
+int ti[maxn];
+int co[maxn][maxn];
 
-int k;
-int ck;
-int cs[maxn*3];
-int sol[maxn*3];
+int f[1<<maxn];
+int p[1<<maxn];
 
-lli ans = 0x7FFFFFFFFFFF;
-lli dis[maxn];
-lli dis2[maxn][maxn];
+int sqr(int x) { return x * x; }
 
-lli d1(int c) {
-    return 2 * dis[c];
-}
-
-lli d2(int x, int y) {
-    return dis2[x][y];
-}
-
-void del(int x) {
-    R[L[x]] = R[x];
-    L[R[x]] = L[x];
-}
-
-void rec(int x) {
-    R[L[x]] = L[R[x]] = x;
-}
-
-void pr(void) {
-    cout << head;
-    for (int i = R[head]; i != head; i = R[i]) {
-        cout << "->" << i;
-    }
-    cout << endl;
-}
-
-void dfs(int sum, int cnt) {
-    if (cnt >= n) {
-        if (sum < ans) {
-            ans = sum;
-            ck = k;
-            for (int i = 0; i < k; ++i) sol[i] = cs[i];
-        }
-        return ;
-    }
-    if (sum > ans) return ;
-    int cur = R[head];
-    if (cur == head) return ;
-    // case 1
-    if (sum + d1(cur) < ans) {
-        cs[k++] = cur;
-        cs[k++] = -1;
-        del(cur);
-        dfs(sum+d1(cur), cnt+1);
-        rec(cur);
-        k -= 2;
-    }
-    // case 2
-    del(cur);
-    cs[k++] = cur;
-    for (int t = R[head]; t != head; t = R[t]) {
-        if (sum+d2(cur,t) > ans) continue;
-        cs[k++] = t;
-        cs[k++] = -1;
-        del(t);
-        dfs(sum+d2(cur,t), cnt+2);
-        rec(t);
-        k -= 2;
-    }
-    rec(cur);
-    --k;
-}
-
-lli sx, sy;
-lli x[maxn], y[maxn];
-
-void read() {
-    cin >> sx >> sy;
-    cin >> n;
+void read(void) {
+    scanf("%d%d%d", &gx, &gy, &n);
     for (int i = 0; i < n; ++i) {
-        cin >> x[i] >> y[i];
-        x[i] -= sx;
-        y[i] -= sy;
+        scanf("%d%d", &x[i], &y[i]);
+        ti[i] = sqr(x[i]-gx) + sqr(y[i]-gy);
     }
 }
 
-# define SQ(x) ((x) * (x))
-
-void pre() {
+void pre(void) {
     for (int i = 0; i < n; ++i) {
-        dis[i] = SQ(x[i]) + SQ(y[i]);
-    }
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
-            lli cc = SQ(x[i]-x[j]) + SQ(y[i]-y[j]);
-            dis2[i][j] = dis[i] + dis[j] + cc; // min(dis[i] + dis[j] + cc, min(2 * dis[i] + 2 * cc, 2 * dis[j] + 2 * cc));
+        for (int j = i+1; j < n; ++j) {
+            co[j][i] = co[i][j] = ti[i]+ti[j]+sqr(x[i]-x[j])+sqr(y[i]-y[j]);
         }
     }
-    head = n;
-    for (int i = 0; i <= n; ++i) R[i] = i + 1, L[i] = i-1;
-    L[0] = head;
-    R[head] = 0;
 }
+
+int dp(void) {
+    int m = 1 << n;
+    std::fill(f, f+m, INF);
+    f[0] = 0;
+    for (int i = 1; i < m; ++i) {
+        for (int j = 0; j < maxn; ++j) if (get_bit(i,j)){
+            int t = i ^ (0x1<<j);
+            if (f[i] > f[t] + 2*ti[j]) {
+                f[i] = f[t] + 2*ti[j];
+                p[i] = t;
+            }
+            for (int k = j+1; k < maxn; ++k) if (get_bit(i,k)) {
+                int u = t ^ (0x1<<k);
+                if (f[i] > f[u] + co[j][k]) {
+                    f[i] = f[u] + co[j][k];
+                    p[i] = u;
+                }
+            }
+            break;
+        }
+    }
+    return f[m-1];
+}
+
+void print(int s) {
+    if (!s) {
+        printf("0 ");
+    } else {
+        print(p[s]);
+        for (int i = 0; i < maxn; ++i) {
+            if (get_bit(s,i) != get_bit(p[s], i)) {
+                printf("%d ", i+1);
+            }
+        }
+        printf("0 ");
+    }
+}
+
+# define testin freopen("in.txt", "r", stdin)
 
 int main()
 {
@@ -120,13 +79,8 @@ int main()
 
     read();
     pre();
-    dfs(0, 0);
-
-    cout << ans << endl << "0";
-    for (int i = 0; i < ck; ++i) {
-        cout << ' ' << sol[i] + 1;
-    }
-    cout << endl;
+    printf("%d\n", dp());
+    print((1<<n)-1);
 
     return 0;
 }
