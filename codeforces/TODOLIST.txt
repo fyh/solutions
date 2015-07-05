@@ -1,6 +1,4 @@
 summarize 
 - cf#10d
 - cf#8c
-- cf#14c
-- cf#14d(http://codeforces.com/contest/14/submission/10996281, http://codeforces.com/contest/14/submission/10996281, http://www.cnblogs.com/celia01/archive/2012/07/30/2615842.html)
 - ...(stared problems)
