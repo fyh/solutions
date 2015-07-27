@@ -1,0 +1,10 @@
+idea:
+1. dynamic programming
+2. bottom up implementation
+
+restricts:
+1. non-negative cycle 
+
+topics:
+1. find all all pairs shortest paths and corresponding distance
+2. transitive-closure
