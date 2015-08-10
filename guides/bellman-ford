@@ -1,0 +1,3 @@
+in the ith iteration, the ith edge in the shortest path is relaxed.
+
+bellman-ford works on negative weight graphs.

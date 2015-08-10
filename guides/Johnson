@@ -1,0 +1,11 @@
+Compute all pairs shortest paths using Bellman-Ford and Dijkstra.
+
+time-complexity: O(V^2lgV+VE)
+
+asymptotically faster than the Floyd-Warshall algorithm, especially in sparse graphs (when dijsktra is implemented in O(V^2lgV))
+
+the process:
+1. build a new grapth with a source S.
+2. using bellman-ford comput shortest distances h from S to the other vertexes.
+3. replace w[i,j] with h[i]+w[i,j]-h[j]
+4. do a dijstra with the reweighted graph.

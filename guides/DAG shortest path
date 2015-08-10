@@ -1,0 +1,5 @@
+steps:
+1. topological sort
+2. in topological order, relax every linked edge of each vertex.
+
+overall time-complexity is O(V+E)

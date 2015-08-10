@@ -1,0 +1,17 @@
+[poj discuss][poj.org/showmessage?message_id=136458]
+
+The formal academic reference can be found in the course "Network Optimization" of MIT.
+You can achieve it using this link (SES #7, Page 18-20) :
+http://ocw.mit.edu/OcwWeb/Sloan-School-of-Management/15-082JNetwork-OptimizationSpring2003/LectureNotes/index.htm
+It is just an improvement of Bellman-Ford algorithm, and its worst case complexity is very bad.
+Furthermore, it is very easy to construct a data to defeat this algorithm.
+Suppose you want the shortest path from vertex 1 to vertex n,
+then we can add edge (i, i + 1) with a small random weight for 1 <= i < n (thus the shortest path should be 1-2-...-n),
+and randomly add 4n other heavy edges. For this case, the so-called SPFA algorithm will be very slow.
+
+
+(1) SPFA is just a variation of Bellman-Ford, and SPFA is not its real name.
+(2) It works well on random sparse graph, but programming contest should consider the worst case.
+(3) Anyway, it is much faster than the original Bellman-Ford,
+so it will be very helpful if we want to find the shortest path in graphs containing negative weight edges,
+such as min cost flow problem.
