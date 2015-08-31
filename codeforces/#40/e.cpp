@@ -1,18 +1,21 @@
+// editorial : http://codeforces.com/blog/entry/1620
+
 # include <bits/stdc++.h>
 using namespace std;
 typedef long long int lli;
 
-string a, b;
+int n;
 
 int main()
 {
-    cin >> a >> b;
-    reverse(b.begin(), b.end());
-
-    if (a == b) cout << "YES";
-    else cout << "NO";
-
-    cout << endl;
+    cin >> n;
+    int h = n / 2;
+    cout << h * (n-h) << endl;
+    for (int i = 1; i <= h; ++i) {
+        for (int j = h+1; j <= n; ++j) {
+            cout << i << ' ' << j << endl;
+        }
+    }
 
     return 0;
 }
