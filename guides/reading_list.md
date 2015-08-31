@@ -1,1 +1,1 @@
-A Course in Combinatorics
+A Course in Combinatorics J. H. van Lint / R. M. Wilson  Cambridge University Press
