@@ -33,7 +33,7 @@ void solve() {
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
         while (a[i] > 1) {
-            for (int j = 0; pt[j] <= a[i]; ++j) {
+            for (int j = 0; pt[j] <= a[i] && j < pn; ++j) {
                 while (a[i] % pt[j] == 0) {
                     a[i] /= pt[j];
                     Q.push(pt[j]);
