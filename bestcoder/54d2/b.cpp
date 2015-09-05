@@ -32,14 +32,13 @@ void solve() {
     priority_queue<int, vector<int>, greater<int> > Q;
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
-        while (a[i] > 1) {
-            for (int j = 0; pt[j] <= a[i] && j < pn; ++j) {
-                while (a[i] % pt[j] == 0) {
-                    a[i] /= pt[j];
-                    Q.push(pt[j]);
-                }
+        for (int j = 0; pt[j] <= a[i] && j < pn; ++j) {
+            while (a[i] % pt[j] == 0) {
+                a[i] /= pt[j];
+                Q.push(pt[j]);
             }
         }
+        if (a[i] != 1) Q.push(a[i]);
     }
     if (Q.size() < 2) {
         cout << -1 << endl;
