@@ -1,59 +1,81 @@
-#include <cstdio>
-#include <map>
-#include <string>
-#include <algorithm>
-# include <iostream>
+# include <bits/stdc++.h>
 using namespace std;
-int i,x,y,n,p,r,z,m,a[100100],b[100100],k[100100];
-map <string, int> mm;
-string st[100100];
-char s[44];
-bool cmp(int i, int j) {
-  return (a[i]<a[j] || (a[i]==a[j] && st[i]>st[j]));
+typedef long long int lli;
+typedef pair<int,string> pis;
+
+map<string,int> na;
+vector<pis> vec;
+multiset<int> b, c;
+
+int n, m;
+
+bool cmp(const pis &x, const pis &y) {
+    return !(x.first>y.first || (x.first==y.first && x.second<y.second));
 }
-/*
-3 4 7
 
-7 8 9
-6 7 11
+int main()
+{
+    cin.tie(0);
+    ios_base::sync_with_stdio(false);
 
-8 3  1  9
-5 1  3  8
-//3 A 3 B 5 C 8 3 4 3 1 A
+    cin >> n;
+    for (int i = 0; i < n; ++i) {
+        string str; int a;
+        cin >> str >> a;
+        na[str] = a;
+        vec.push_back(make_pair(a, str));
+    }
+    sort(vec.begin(), vec.end(), cmp);
+    cin >> m;
+    for (int i = 0; i < m; ++i) {
+        int val; cin >> val;
+        b.insert(val);
+    }
+    for (int i = m; i < n; ++i) b.insert(0);
+    string ta;
+    cin >> ta;
+    int val = na[ta] + *b.rbegin();
+    c = b;
+    auto itb = b.end();
+    b.erase(--itb);
+    int r = 1;
+    for (auto it = vec.begin(); it != vec.end(); ++it) {
+        if (it->second != ta) {
+            auto iter = b.begin();
+            if (it->second < ta) {
+                iter = b.lower_bound(val - it->first);
+            } else {
+                iter = b.upper_bound(val - it->first);
+            }
+            if (iter != b.begin()) {
+                --iter;
+                b.erase(iter);
+            } else {
+                ++r;
+            }
+        }
+    }
+    cout << r << ' ';
 
-A B C
-3 5 8
-4 3 1
+    b = c;
+    val = na[ta] + *b.begin();
+    b.erase(b.begin());
+    r = 1;
+    for (auto it = vec.begin(); it != vec.end(); ++it) {
+        if (it->second != ta) {
+            auto iter = b.begin();
+            if (it->second < ta) {
+                iter = b.lower_bound(val - it->first);
+            } else {
+                iter = b.upper_bound(val - it->first);
+            }
+            if (iter != b.end()) {
+                ++r;
+                b.erase(iter);
+            }
+        }
+    }
+    cout << r << endl;
 
-7 6 11
-7 8 9
-
-*/
-int main() {
-  scanf("%d",&n);
-  for (i=0; i<n; i++) {
-    scanf("%s",s);
-    st[i]=s; mm[st[i]]=i+1;
-    scanf("%d",&a[i]); k[i]=i;
-  }
-  sort(k,k+n,cmp);
-  scanf("%d",&m);
-  for (i=0; i<m; i++) scanf("%d",&b[i]);
-  sort(b,b+m);
-  reverse(b,b+m);
-  scanf("%s",s);
-  x=mm[s]-1; y=a[x]+b[0]; p=1; r=1;
-  for (i=0; i<n; i++) if (k[i]!=x) {
-    if (st[k[i]]<st[x]) z=y-a[k[i]]-1; else z=y-a[k[i]];
-    if (p>=n || b[p]>z) r++;
-    p++;
-  }
-  printf("%d ",r);
-  y=a[x]+b[n-1]; p=0; r=1;
-  for (i=0; i<n; i++) if (k[i]!=x) {
-    if (st[k[i]]<st[x]) z=y-a[k[i]]; else z=y-a[k[i]]+1;
-    if (p<n && b[p]>=z) { p++; r++; }
-  }
-  printf("%d\n",r);
-  return 0;
+    return 0;
 }
