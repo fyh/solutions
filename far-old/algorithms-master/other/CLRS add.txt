@@ -1,0 +1,93 @@
+Add:
+Adjacency list
+Advanced topics of Data Structures
+AKS Primality Test
+Algorithm for generating random k-subset of an n-set
+Alias method for efficiently sampling from discrete probability distribution
+Approximation algorithms
+Big table
+Binary indexed trees / Fenwick trees
+Bloom filter
+Cache oblivious algorithms
+Combinatorial algorithms
+Competitive programming
+Data stream algorithms
+Distributed hash table
+Examples of real world np problems
+Finger Trees
+Functional programming / lambda calculus
+Fractal trees
+Guide to solve exercises, provide solutions online
+Hash trees
+Interval trees
+Introduce non-blocking data structures
+K-means clustering
+Kd-trees
+Kirchhoff's matrix free theorem that provides the number of spanning tree in a graph
+Line sweep
+Link-cut trees
+Locality sensitive hashing
+LSM trees
+Machine learning algorithms
+Map-Reduce
+Matching and Independent sets
+Math appendix to help understand analysis
+Minhash
+Monte Carlo / Las Vegas algorithms
+Nested sets
+Page rank
+Parameterized algorithms and fixed-parameter tractability
+R-Trees/Quadtrees
+Randomized algorithms and data structures
+Scapegoat trees
+Segment trees
+Simulated annealing
+Skip lists
+Sparse matrix
+Spectral graph algorithms
+Streaming algorithms
+String parsing
+Sublinear algorithms and sampling
+Succinct data structures
+Suffix tree and suffix array\
+Transitive closure and its reduction
+Viterbi Decoding
+
+Remove:
+Advanced data structures
+Computational geometry
+FFT
+Fibonacci heaps
+Move advanced or optional sections online to make room in the book
+Linear Programming
+Multithreaded algorithms
+Number theoretic algorithms
+Red black tree
+Sorting networks
+Strassen's algorithm for matrix multiplication
+van Emde Boas Trees
+
+Don't remove:
+FFT
+Linear programming
+van Emde Boas Trees
+
+Expand:
+Akra-Bazzi method
+AVL tree
+Computation Geometry (Chapter 33) with finding point in polygon
+Maximum flow with Hungarian algorithm
+Perfect Hashing with Minimal Perfect Hashing
+Persistent data structures
+Stable marriage algorithm
+
+Contract:
+Augmenting data structures
+Greedy algorithms
+Matrix operations
+Medians and order statistics
+Red-Black Trees
+
+Others:
+Backtracking and branch and bound should be explained under general design technique
+Saswata   Shannigrahi's answer to As we start planning the next edition of   Introduction to Algorithms (CLRS), what should we add and what should  we  remove? : Redefine "in-place"
