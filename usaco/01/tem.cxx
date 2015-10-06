@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-    rdio(TASK_NAME);
+    //rdio(TASK_NAME);
 
     return 0;
 }
