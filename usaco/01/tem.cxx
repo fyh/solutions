@@ -1,7 +1,7 @@
 /*
 ID: yajunwf1
 LANG: C++11
-TASK:
+TASK: TASK_NAME
 */
 # include <bits/stdc++.h>
 using namespace std;
@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-    rdio(x);
+    rdio(TASK_NAME);
 
     return 0;
 }
