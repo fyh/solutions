@@ -1,4 +1,5 @@
 @echo off
+rem eg. cr friday.cpp
 if exist %1. (
     echo file exists!
 ) else (
