@@ -5,11 +5,12 @@ TASK:
 */
 # include <bits/stdc++.h>
 using namespace std;
-# define in(x) freopen(#x".in", "r", stdin)
-# define out(x) freopen(#x".out", "w", stdout)
+# define rdio(x) freopen(#x".in", "r", stdin), freopen(#x".out", "w", stdout)
 
 
 int main()
 {
+    rdio(x);
+
     return 0;
 }
