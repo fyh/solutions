@@ -12,43 +12,63 @@ const int maxn = 15;
 
 int n;
 int x[maxn], y[maxn];
-int b[maxn][maxn];
 
-int h, r[maxn], l[maxn];
+int r[maxn];
 
-void init() {
-    h = 0;
-    for (int i = 0; i <= n; ++i) {
-        l[i] = i - 1;
-        r[i] = i + 1;
+void pre() {
+    for (int i = 1; i <= n; ++i) {
+        int tj = 0, tx = 2e9;
+        for (int j = 1; j <= n; ++j) if (j!=i && y[j]==y[i] && x[j]>x[i]) {
+            if (x[j] < tx) {
+                tx = x[j];
+                tj = j;
+            }
+        }
+        r[i] = tj;
     }
-    l[0] = n, r[n] = 0;
 }
 
-void del(int x) {
-    r[l[x]] = r[x];
-    l[r[x]] = l[x];
-}
+int go[maxn];
 
-void rec(int x) {
-    l[r[x]] = r[l[x]] = x;
-}
-
-void dfs(int &ans) {
-    if (r[h] == h) {
-        --ans;
-        return ;
-    }
-    int c = r[h];
-    del(c);
-    for (int j = r[h]; j != h; j = r[j]) {
-        if (!b[c][j]) {
-            del(j);
-            dfs(ans);
-            rec(j);
+bool f[maxn];
+bool chk() {
+    for (int i = 1; i <= n; ++i) {
+        memset(f, false, sizeof(f));
+        int s = i;
+        while (true) {
+            if (f[s]) return true;
+            f[s] = true;
+            s = go[s];
+            s = r[s];
+            if (!s) break;
         }
     }
-    rec(c);
+    return false;
+}
+
+int v[maxn];
+int ans = 0;
+void make(int cnt) {
+    if (cnt >= n) {
+        if (chk()) ++ans;
+        return ;
+    }
+    for (int i = 1; i <= n; ++i) {
+        if (!v[i]) {
+            v[i] = true;
+            for (int j = i+1; j <= n; ++j) {
+                if (!v[j]) {
+                    v[j] = true;
+                    go[i] = j;
+                    go[j] = i;
+                    make(cnt+2);
+                    v[j] = false;
+                }
+            }
+            v[i] = false;
+            break;
+        }
+    }
 }
 
 int main()
@@ -56,20 +76,14 @@ int main()
 	cin.tie(0);
 	ios_base::sync_with_stdio(false);
 
-    // rdio(wormhole);
+    rdio(wormhole);
 
     cin >> n;
     for (int i = 1; i <= n; ++i) cin >> x[i] >> y[i];
 
-    int ans = 1;
-    for (int i = 1; i <= n; ++i) {
-        for (int j = 1; j <= n; ++j) {
-            b[i][j] = (x[i]==x[j]);
-        }
-    }
-    for (int i = 1; i < n; i+=2) ans *= i;
-    init();
-    dfs(ans);
+    pre();
+    make(0);
+
     cout << ans << endl;
 
     return 0;
