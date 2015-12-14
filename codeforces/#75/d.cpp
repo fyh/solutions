@@ -23,7 +23,7 @@ int main()
         else b[i] = b[i+1], c[i] = a[ b[i+1] ];
     }
     for (int i = 1; i <= n; ++i) {
-        int t = lower_bound(c+i, c+n, a[i]) - c - 2 - i;
+        int t = lower_bound(c+i, c+n+1, a[i]) - c - 2 - i;
         if (t < 0) ++t;
         cout << max(t, -1) << ' ';
     }
