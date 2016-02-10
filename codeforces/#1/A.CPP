@@ -6,8 +6,7 @@
 
 int n, m, a;
 
-int main()
-{
+int main() {
     //testin;
 
     scanf("%d%d%d", &n, &m, &a);
